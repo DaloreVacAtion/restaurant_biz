@@ -1,0 +1,1455 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.16
+-- Dumped by pg_dump version 14.4
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+--
+-- Name: account_check; Type: TABLE; Schema: public; Owner: booking_user
+--
+
+CREATE TABLE public.account_check (
+    id bigint NOT NULL,
+    amount numeric(20,2) NOT NULL,
+    visit_date timestamp with time zone NOT NULL,
+    restaurant_id bigint,
+    user_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.account_check OWNER TO booking_user;
+
+--
+-- Name: account_check_id_seq; Type: SEQUENCE; Schema: public; Owner: booking_user
+--
+
+CREATE SEQUENCE public.account_check_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_check_id_seq OWNER TO booking_user;
+
+--
+-- Name: account_check_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: booking_user
+--
+
+ALTER SEQUENCE public.account_check_id_seq OWNED BY public.account_check.id;
+
+
+--
+-- Name: account_user; Type: TABLE; Schema: public; Owner: booking_user
+--
+
+CREATE TABLE public.account_user (
+    id bigint NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    first_name character varying(150) NOT NULL,
+    last_name character varying(150) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL,
+    username character varying(128) NOT NULL,
+    name character varying(100)
+);
+
+
+ALTER TABLE public.account_user OWNER TO booking_user;
+
+--
+-- Name: account_user_groups; Type: TABLE; Schema: public; Owner: booking_user
+--
+
+CREATE TABLE public.account_user_groups (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.account_user_groups OWNER TO booking_user;
+
+--
+-- Name: account_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: booking_user
+--
+
+CREATE SEQUENCE public.account_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_user_groups_id_seq OWNER TO booking_user;
+
+--
+-- Name: account_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: booking_user
+--
+
+ALTER SEQUENCE public.account_user_groups_id_seq OWNED BY public.account_user_groups.id;
+
+
+--
+-- Name: account_user_id_seq; Type: SEQUENCE; Schema: public; Owner: booking_user
+--
+
+CREATE SEQUENCE public.account_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_user_id_seq OWNER TO booking_user;
+
+--
+-- Name: account_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: booking_user
+--
+
+ALTER SEQUENCE public.account_user_id_seq OWNED BY public.account_user.id;
+
+
+--
+-- Name: account_user_user_permissions; Type: TABLE; Schema: public; Owner: booking_user
+--
+
+CREATE TABLE public.account_user_user_permissions (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.account_user_user_permissions OWNER TO booking_user;
+
+--
+-- Name: account_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: booking_user
+--
+
+CREATE SEQUENCE public.account_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_user_user_permissions_id_seq OWNER TO booking_user;
+
+--
+-- Name: account_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: booking_user
+--
+
+ALTER SEQUENCE public.account_user_user_permissions_id_seq OWNED BY public.account_user_user_permissions.id;
+
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: booking_user
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO booking_user;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: booking_user
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO booking_user;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: booking_user
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: booking_user
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id bigint NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO booking_user;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: booking_user
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO booking_user;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: booking_user
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: booking_user
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO booking_user;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: booking_user
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO booking_user;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: booking_user
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: booking_booking; Type: TABLE; Schema: public; Owner: booking_user
+--
+
+CREATE TABLE public.booking_booking (
+    id bigint NOT NULL,
+    uuid uuid NOT NULL,
+    status integer NOT NULL,
+    visit_time time without time zone,
+    expired_time time without time zone,
+    user_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.booking_booking OWNER TO booking_user;
+
+--
+-- Name: booking_booking_id_seq; Type: SEQUENCE; Schema: public; Owner: booking_user
+--
+
+CREATE SEQUENCE public.booking_booking_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.booking_booking_id_seq OWNER TO booking_user;
+
+--
+-- Name: booking_booking_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: booking_user
+--
+
+ALTER SEQUENCE public.booking_booking_id_seq OWNED BY public.booking_booking.id;
+
+
+--
+-- Name: booking_booking_tables; Type: TABLE; Schema: public; Owner: booking_user
+--
+
+CREATE TABLE public.booking_booking_tables (
+    id bigint NOT NULL,
+    booking_id bigint NOT NULL,
+    table_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.booking_booking_tables OWNER TO booking_user;
+
+--
+-- Name: booking_booking_tables_id_seq; Type: SEQUENCE; Schema: public; Owner: booking_user
+--
+
+CREATE SEQUENCE public.booking_booking_tables_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.booking_booking_tables_id_seq OWNER TO booking_user;
+
+--
+-- Name: booking_booking_tables_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: booking_user
+--
+
+ALTER SEQUENCE public.booking_booking_tables_id_seq OWNED BY public.booking_booking_tables.id;
+
+
+--
+-- Name: booking_restaurant; Type: TABLE; Schema: public; Owner: booking_user
+--
+
+CREATE TABLE public.booking_restaurant (
+    id bigint NOT NULL,
+    city character varying(100) NOT NULL,
+    name character varying(100) NOT NULL,
+    avg_time integer
+);
+
+
+ALTER TABLE public.booking_restaurant OWNER TO booking_user;
+
+--
+-- Name: booking_restaurant_id_seq; Type: SEQUENCE; Schema: public; Owner: booking_user
+--
+
+CREATE SEQUENCE public.booking_restaurant_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.booking_restaurant_id_seq OWNER TO booking_user;
+
+--
+-- Name: booking_restaurant_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: booking_user
+--
+
+ALTER SEQUENCE public.booking_restaurant_id_seq OWNED BY public.booking_restaurant.id;
+
+
+--
+-- Name: booking_table; Type: TABLE; Schema: public; Owner: booking_user
+--
+
+CREATE TABLE public.booking_table (
+    id bigint NOT NULL,
+    number integer NOT NULL,
+    capacity smallint NOT NULL,
+    restaurant_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.booking_table OWNER TO booking_user;
+
+--
+-- Name: booking_table_id_seq; Type: SEQUENCE; Schema: public; Owner: booking_user
+--
+
+CREATE SEQUENCE public.booking_table_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.booking_table_id_seq OWNER TO booking_user;
+
+--
+-- Name: booking_table_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: booking_user
+--
+
+ALTER SEQUENCE public.booking_table_id_seq OWNED BY public.booking_table.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: booking_user
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id bigint NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO booking_user;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: booking_user
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO booking_user;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: booking_user
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: booking_user
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO booking_user;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: booking_user
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO booking_user;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: booking_user
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: booking_user
+--
+
+CREATE TABLE public.django_migrations (
+    id bigint NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO booking_user;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: booking_user
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO booking_user;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: booking_user
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: booking_user
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO booking_user;
+
+--
+-- Name: account_check id; Type: DEFAULT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.account_check ALTER COLUMN id SET DEFAULT nextval('public.account_check_id_seq'::regclass);
+
+
+--
+-- Name: account_user id; Type: DEFAULT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.account_user ALTER COLUMN id SET DEFAULT nextval('public.account_user_id_seq'::regclass);
+
+
+--
+-- Name: account_user_groups id; Type: DEFAULT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.account_user_groups ALTER COLUMN id SET DEFAULT nextval('public.account_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: account_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.account_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.account_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: booking_booking id; Type: DEFAULT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.booking_booking ALTER COLUMN id SET DEFAULT nextval('public.booking_booking_id_seq'::regclass);
+
+
+--
+-- Name: booking_booking_tables id; Type: DEFAULT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.booking_booking_tables ALTER COLUMN id SET DEFAULT nextval('public.booking_booking_tables_id_seq'::regclass);
+
+
+--
+-- Name: booking_restaurant id; Type: DEFAULT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.booking_restaurant ALTER COLUMN id SET DEFAULT nextval('public.booking_restaurant_id_seq'::regclass);
+
+
+--
+-- Name: booking_table id; Type: DEFAULT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.booking_table ALTER COLUMN id SET DEFAULT nextval('public.booking_table_id_seq'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Data for Name: account_check; Type: TABLE DATA; Schema: public; Owner: booking_user
+--
+
+COPY public.account_check (id, amount, visit_date, restaurant_id, user_id) FROM stdin;
+1	2000.00	2022-07-09 18:08:51.761292+04	1	14
+2	1500.00	2022-07-09 18:09:29.949447+04	2	14
+3	1000.00	2022-07-09 18:10:16.520507+04	3	14
+\.
+
+
+--
+-- Data for Name: account_user; Type: TABLE DATA; Schema: public; Owner: booking_user
+--
+
+COPY public.account_user (id, password, last_login, is_superuser, first_name, last_name, email, is_staff, is_active, date_joined, username, name) FROM stdin;
+1	pbkdf2_sha256$320000$BGT5WUV1NWr5Ykw5VOPQxg$+ENaPU5H716o7wXLavIFErD8NdY1ihh/Ijg8glJ3OaQ=	2022-07-09 18:06:55.670438+04	t				t	t	2022-07-09 16:31:56.418919+04	+79376568217	
+14	pbkdf2_sha256$320000$bO7yBbEzRvJ8fs8HO5jL2A$SNm+v9CtzPEIcb/vT6Sj7h78UZWx7xF3q7sM61BZYZo=	\N	f				f	t	2022-07-09 18:07:34.136732+04	+79376568213	Тестовый пользователь
+15		\N	f				f	t	2022-07-09 18:15:46.006522+04	+79999999999	\N
+\.
+
+
+--
+-- Data for Name: account_user_groups; Type: TABLE DATA; Schema: public; Owner: booking_user
+--
+
+COPY public.account_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: account_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: booking_user
+--
+
+COPY public.account_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: booking_user
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: booking_user
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: booking_user
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can view log entry	1	view_logentry
+5	Can add permission	2	add_permission
+6	Can change permission	2	change_permission
+7	Can delete permission	2	delete_permission
+8	Can view permission	2	view_permission
+9	Can add group	3	add_group
+10	Can change group	3	change_group
+11	Can delete group	3	delete_group
+12	Can view group	3	view_group
+13	Can add content type	4	add_contenttype
+14	Can change content type	4	change_contenttype
+15	Can delete content type	4	delete_contenttype
+16	Can view content type	4	view_contenttype
+17	Can add session	5	add_session
+18	Can change session	5	change_session
+19	Can delete session	5	delete_session
+20	Can view session	5	view_session
+21	Can add Пользователь	6	add_user
+22	Can change Пользователь	6	change_user
+23	Can delete Пользователь	6	delete_user
+24	Can view Пользователь	6	view_user
+25	Can add Чек	7	add_check
+26	Can change Чек	7	change_check
+27	Can delete Чек	7	delete_check
+28	Can view Чек	7	view_check
+29	Can add Ресторан	8	add_restaurant
+30	Can change Ресторан	8	change_restaurant
+31	Can delete Ресторан	8	delete_restaurant
+32	Can view Ресторан	8	view_restaurant
+33	Can add Столик	9	add_table
+34	Can change Столик	9	change_table
+35	Can delete Столик	9	delete_table
+36	Can view Столик	9	view_table
+37	Can add Бронь	10	add_booking
+38	Can change Бронь	10	change_booking
+39	Can delete Бронь	10	delete_booking
+40	Can view Бронь	10	view_booking
+\.
+
+
+--
+-- Data for Name: booking_booking; Type: TABLE DATA; Schema: public; Owner: booking_user
+--
+
+COPY public.booking_booking (id, uuid, status, visit_time, expired_time, user_id) FROM stdin;
+1	0376ba7a-5d9a-4e20-9c16-ca7966747082	0	19:30:00	21:30:00	15
+\.
+
+
+--
+-- Data for Name: booking_booking_tables; Type: TABLE DATA; Schema: public; Owner: booking_user
+--
+
+COPY public.booking_booking_tables (id, booking_id, table_id) FROM stdin;
+1	1	1
+2	1	9
+\.
+
+
+--
+-- Data for Name: booking_restaurant; Type: TABLE DATA; Schema: public; Owner: booking_user
+--
+
+COPY public.booking_restaurant (id, city, name, avg_time) FROM stdin;
+1	Самара	Каравелла	30
+2	Самара	Мясо и Салат	60
+3	Самара	Молодость	45
+\.
+
+
+--
+-- Data for Name: booking_table; Type: TABLE DATA; Schema: public; Owner: booking_user
+--
+
+COPY public.booking_table (id, number, capacity, restaurant_id) FROM stdin;
+1	1	4	1
+2	2	4	1
+3	3	4	1
+4	4	4	1
+5	5	4	1
+6	6	4	1
+7	7	3	1
+8	8	3	1
+9	9	2	1
+10	10	2	1
+11	1	3	3
+12	2	3	3
+13	3	3	3
+14	1	8	2
+15	2	8	2
+16	3	3	2
+17	4	3	2
+18	5	3	2
+19	6	3	2
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: booking_user
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2022-07-09 16:34:12.87465+04	2	Тестовый пользователь: +79376568213	1	[{"added": {}}]	6	1
+2	2022-07-09 16:35:23.652365+04	2	Тестовый пользователь: +79376568213	3		6	1
+3	2022-07-09 16:36:55.31781+04	3	Имя не установлено: +79376568213	1	[{"added": {}}]	6	1
+4	2022-07-09 16:39:31.467657+04	3	Имя не установлено: +79376568213	3		6	1
+5	2022-07-09 16:39:46.109479+04	4	Имя не установлено: +79376568213	1	[{"added": {}}]	6	1
+6	2022-07-09 16:41:44.784571+04	5	Имя не установлено: +79376568214	1	[{"added": {}}]	6	1
+7	2022-07-09 16:47:06.51441+04	6	Имя не установлено: +79376568215	1	[{"added": {}}]	6	1
+8	2022-07-09 17:05:45.303279+04	7	Имя не установлено: +79376568216	1	[{"added": {}}]	6	1
+9	2022-07-09 17:11:06.987014+04	4	Имя не установлено: +79376568213	3		6	1
+10	2022-07-09 17:11:06.988723+04	5	Имя не установлено: +79376568214	3		6	1
+11	2022-07-09 17:11:06.989859+04	6	Имя не установлено: +79376568215	3		6	1
+12	2022-07-09 17:11:06.99104+04	7	Имя не установлено: +79376568216	3		6	1
+13	2022-07-09 17:14:13.931066+04	8	Имя не установлено: +79376568212	1	[{"added": {}}]	6	1
+14	2022-07-09 17:14:35.517373+04	9	Имя не установлено: +79376568214	1	[{"added": {}}]	6	1
+15	2022-07-09 17:15:21.075966+04	10	Имя не установлено: +79376568215	1	[{"added": {}}]	6	1
+16	2022-07-09 17:16:07.763594+04	11	Имя не установлено: +79376568216	1	[{"added": {}}]	6	1
+17	2022-07-09 17:22:00.634101+04	12	Имя не установлено: +79376568218	1	[{"added": {}}]	6	1
+18	2022-07-09 17:23:27.774967+04	8	Имя не установлено: +79376568212	3		6	1
+19	2022-07-09 17:23:27.776561+04	9	Имя не установлено: +79376568214	3		6	1
+20	2022-07-09 17:23:27.777374+04	10	Имя не установлено: +79376568215	3		6	1
+21	2022-07-09 17:23:27.778175+04	11	Имя не установлено: +79376568216	3		6	1
+22	2022-07-09 17:23:27.779056+04	12	Имя не установлено: +79376568218	3		6	1
+23	2022-07-09 18:07:34.322173+04	14	Тестовый пользователь: +79376568213	1	[{"added": {}}]	6	1
+24	2022-07-09 18:07:44.81632+04	13	Имя не установлено: +79376568212	3		6	1
+25	2022-07-09 18:08:39.028723+04	1	Каравелла	1	[{"added": {}}]	8	1
+26	2022-07-09 18:08:51.762448+04	1	Тестовый пользователь: +79376568213: дата 2022-07-09 14:08:51.761292+00:00, сумма: 2000	1	[{"added": {}}]	7	1
+27	2022-07-09 18:09:18.547281+04	2	Мясо и Салат	1	[{"added": {}}]	8	1
+28	2022-07-09 18:09:29.950418+04	2	Тестовый пользователь: +79376568213: дата 2022-07-09 14:09:29.949447+00:00, сумма: 1500	1	[{"added": {}}]	7	1
+29	2022-07-09 18:10:03.059801+04	3	Молодость	1	[{"added": {}}]	8	1
+30	2022-07-09 18:10:16.5215+04	3	Тестовый пользователь: +79376568213: дата 2022-07-09 14:10:16.520507+00:00, сумма: 1000	1	[{"added": {}}]	7	1
+31	2022-07-09 18:10:50.373251+04	1	Каравелла: 1-4	1	[{"added": {}}]	9	1
+32	2022-07-09 18:10:58.497744+04	2	Каравелла: 2-4	1	[{"added": {}}]	9	1
+33	2022-07-09 18:11:08.179521+04	3	Каравелла: 3-4	1	[{"added": {}}]	9	1
+34	2022-07-09 18:11:28.520204+04	4	Каравелла: 4-4	1	[{"added": {}}]	9	1
+35	2022-07-09 18:11:54.450509+04	5	Каравелла: 5-4	1	[{"added": {}}]	9	1
+36	2022-07-09 18:12:03.058762+04	6	Каравелла: 6-4	1	[{"added": {}}]	9	1
+37	2022-07-09 18:12:14.610349+04	7	Каравелла: 7-3	1	[{"added": {}}]	9	1
+38	2022-07-09 18:12:25.585998+04	8	Каравелла: 8-3	1	[{"added": {}}]	9	1
+39	2022-07-09 18:12:35.530599+04	9	Каравелла: 9-2	1	[{"added": {}}]	9	1
+40	2022-07-09 18:12:46.806821+04	10	Каравелла: 10-2	1	[{"added": {}}]	9	1
+41	2022-07-09 18:13:38.434963+04	11	Молодость: 1-3	1	[{"added": {}}]	9	1
+42	2022-07-09 18:13:47.90859+04	12	Молодость: 2-3	1	[{"added": {}}]	9	1
+43	2022-07-09 18:13:55.2898+04	13	Молодость: 3-3	1	[{"added": {}}]	9	1
+44	2022-07-09 18:14:09.757843+04	14	Мясо и Салат: 1-8	1	[{"added": {}}]	9	1
+45	2022-07-09 18:14:16.859146+04	15	Мясо и Салат: 2-8	1	[{"added": {}}]	9	1
+46	2022-07-09 18:14:24.613684+04	16	Мясо и Салат: 3-3	1	[{"added": {}}]	9	1
+47	2022-07-09 18:14:31.288273+04	17	Мясо и Салат: 4-3	1	[{"added": {}}]	9	1
+48	2022-07-09 18:14:37.800871+04	18	Мясо и Салат: 5-3	1	[{"added": {}}]	9	1
+49	2022-07-09 18:14:43.414711+04	19	Мясо и Салат: 6-3	1	[{"added": {}}]	9	1
+\.
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: booking_user
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	contenttypes	contenttype
+5	sessions	session
+6	account	user
+7	account	check
+8	booking	restaurant
+9	booking	table
+10	booking	booking
+\.
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: booking_user
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	account	0001_initial	2022-07-09 16:30:13.300868+04
+2	booking	0001_initial	2022-07-09 16:30:13.331122+04
+3	contenttypes	0001_initial	2022-07-09 16:30:13.338369+04
+4	contenttypes	0002_remove_content_type_name	2022-07-09 16:30:13.351767+04
+5	auth	0001_initial	2022-07-09 16:30:13.380499+04
+6	auth	0002_alter_permission_name_max_length	2022-07-09 16:30:13.384843+04
+7	auth	0003_alter_user_email_max_length	2022-07-09 16:30:13.390529+04
+8	auth	0004_alter_user_username_opts	2022-07-09 16:30:13.395608+04
+9	auth	0005_alter_user_last_login_null	2022-07-09 16:30:13.400783+04
+10	auth	0006_require_contenttypes_0002	2022-07-09 16:30:13.402203+04
+11	auth	0007_alter_validators_add_error_messages	2022-07-09 16:30:13.408321+04
+12	auth	0008_alter_user_username_max_length	2022-07-09 16:30:13.414828+04
+13	auth	0009_alter_user_last_name_max_length	2022-07-09 16:30:13.420914+04
+14	auth	0010_alter_group_name_max_length	2022-07-09 16:30:13.428048+04
+15	auth	0011_update_proxy_permissions	2022-07-09 16:30:13.43775+04
+16	auth	0012_alter_user_first_name_max_length	2022-07-09 16:30:13.443947+04
+17	account	0002_initial	2022-07-09 16:30:13.482766+04
+18	admin	0001_initial	2022-07-09 16:30:13.499822+04
+19	admin	0002_logentry_remove_auto_add	2022-07-09 16:30:13.510525+04
+20	admin	0003_logentry_add_action_flag_choices	2022-07-09 16:30:13.521895+04
+21	sessions	0001_initial	2022-07-09 16:30:13.528654+04
+22	account	0003_alter_user_name	2022-07-09 16:36:32.075367+04
+23	account	0004_alter_user_username	2022-07-09 17:05:17.852062+04
+24	account	0005_alter_user_username	2022-07-09 17:06:22.775193+04
+\.
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: booking_user
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+ji125wi719uycpwce1p74ufzo4su53bt	.eJxVjDsOwjAQRO_iGlnx30tJnzNY3niNA8iW4qRC3J1ESgHlzHszbxbitpawdVrCnNiVCXb57TBOT6oHSI9Y741Pra7LjPxQ-Ek7H1ui1-10_w5K7GVf24xZR5RCqwQOQGPyfvBRyOzBqz1L8oZIWeeMJgDhgCRZRYMBZ5F9vtR5Nxw:1oAB6l:ftdqt8kAOO-E7h6J2JqNAz_q8avLQJwcpR_Cj_UYq6Y	2022-07-23 18:06:55.673019+04
+\.
+
+
+--
+-- Name: account_check_id_seq; Type: SEQUENCE SET; Schema: public; Owner: booking_user
+--
+
+SELECT pg_catalog.setval('public.account_check_id_seq', 3, true);
+
+
+--
+-- Name: account_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: booking_user
+--
+
+SELECT pg_catalog.setval('public.account_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: account_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: booking_user
+--
+
+SELECT pg_catalog.setval('public.account_user_id_seq', 15, true);
+
+
+--
+-- Name: account_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: booking_user
+--
+
+SELECT pg_catalog.setval('public.account_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: booking_user
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: booking_user
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: booking_user
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 40, true);
+
+
+--
+-- Name: booking_booking_id_seq; Type: SEQUENCE SET; Schema: public; Owner: booking_user
+--
+
+SELECT pg_catalog.setval('public.booking_booking_id_seq', 1, true);
+
+
+--
+-- Name: booking_booking_tables_id_seq; Type: SEQUENCE SET; Schema: public; Owner: booking_user
+--
+
+SELECT pg_catalog.setval('public.booking_booking_tables_id_seq', 2, true);
+
+
+--
+-- Name: booking_restaurant_id_seq; Type: SEQUENCE SET; Schema: public; Owner: booking_user
+--
+
+SELECT pg_catalog.setval('public.booking_restaurant_id_seq', 3, true);
+
+
+--
+-- Name: booking_table_id_seq; Type: SEQUENCE SET; Schema: public; Owner: booking_user
+--
+
+SELECT pg_catalog.setval('public.booking_table_id_seq', 19, true);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: booking_user
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 49, true);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: booking_user
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 10, true);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: booking_user
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 24, true);
+
+
+--
+-- Name: account_check account_check_pkey; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.account_check
+    ADD CONSTRAINT account_check_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_user_groups account_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.account_user_groups
+    ADD CONSTRAINT account_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_user_groups account_user_groups_user_id_group_id_4d09af3e_uniq; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.account_user_groups
+    ADD CONSTRAINT account_user_groups_user_id_group_id_4d09af3e_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: account_user account_user_pkey; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.account_user
+    ADD CONSTRAINT account_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_user_user_permissions account_user_user_permis_user_id_permission_id_48bdd28b_uniq; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.account_user_user_permissions
+    ADD CONSTRAINT account_user_user_permis_user_id_permission_id_48bdd28b_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: account_user_user_permissions account_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.account_user_user_permissions
+    ADD CONSTRAINT account_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_user account_user_username_key; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.account_user
+    ADD CONSTRAINT account_user_username_key UNIQUE (username);
+
+
+--
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: booking_booking booking_booking_pkey; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.booking_booking
+    ADD CONSTRAINT booking_booking_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: booking_booking_tables booking_booking_tables_booking_id_table_id_b9bd8a2b_uniq; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.booking_booking_tables
+    ADD CONSTRAINT booking_booking_tables_booking_id_table_id_b9bd8a2b_uniq UNIQUE (booking_id, table_id);
+
+
+--
+-- Name: booking_booking_tables booking_booking_tables_pkey; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.booking_booking_tables
+    ADD CONSTRAINT booking_booking_tables_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: booking_restaurant booking_restaurant_pkey; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.booking_restaurant
+    ADD CONSTRAINT booking_restaurant_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: booking_table booking_table_pkey; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.booking_table
+    ADD CONSTRAINT booking_table_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: account_check_restaurant_id_34b48fbb; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX account_check_restaurant_id_34b48fbb ON public.account_check USING btree (restaurant_id);
+
+
+--
+-- Name: account_check_user_id_676837fc; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX account_check_user_id_676837fc ON public.account_check USING btree (user_id);
+
+
+--
+-- Name: account_user_groups_group_id_6c71f749; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX account_user_groups_group_id_6c71f749 ON public.account_user_groups USING btree (group_id);
+
+
+--
+-- Name: account_user_groups_user_id_14345e7b; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX account_user_groups_user_id_14345e7b ON public.account_user_groups USING btree (user_id);
+
+
+--
+-- Name: account_user_user_permissions_permission_id_66c44191; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX account_user_user_permissions_permission_id_66c44191 ON public.account_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: account_user_user_permissions_user_id_cc42d270; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX account_user_user_permissions_user_id_cc42d270 ON public.account_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: account_user_username_d393f583_like; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX account_user_username_d393f583_like ON public.account_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: booking_booking_tables_booking_id_dc63e8f3; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX booking_booking_tables_booking_id_dc63e8f3 ON public.booking_booking_tables USING btree (booking_id);
+
+
+--
+-- Name: booking_booking_tables_table_id_7d0b56be; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX booking_booking_tables_table_id_7d0b56be ON public.booking_booking_tables USING btree (table_id);
+
+
+--
+-- Name: booking_booking_user_id_e1eb6912; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX booking_booking_user_id_e1eb6912 ON public.booking_booking USING btree (user_id);
+
+
+--
+-- Name: booking_booking_uuid_1dcf2251; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX booking_booking_uuid_1dcf2251 ON public.booking_booking USING btree (uuid);
+
+
+--
+-- Name: booking_table_restaurant_id_469cc8e7; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX booking_table_restaurant_id_469cc8e7 ON public.booking_table USING btree (restaurant_id);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: booking_user
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: account_check account_check_restaurant_id_34b48fbb_fk_booking_restaurant_id; Type: FK CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.account_check
+    ADD CONSTRAINT account_check_restaurant_id_34b48fbb_fk_booking_restaurant_id FOREIGN KEY (restaurant_id) REFERENCES public.booking_restaurant(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_check account_check_user_id_676837fc_fk_account_user_id; Type: FK CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.account_check
+    ADD CONSTRAINT account_check_user_id_676837fc_fk_account_user_id FOREIGN KEY (user_id) REFERENCES public.account_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_user_groups account_user_groups_group_id_6c71f749_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.account_user_groups
+    ADD CONSTRAINT account_user_groups_group_id_6c71f749_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_user_groups account_user_groups_user_id_14345e7b_fk_account_user_id; Type: FK CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.account_user_groups
+    ADD CONSTRAINT account_user_groups_user_id_14345e7b_fk_account_user_id FOREIGN KEY (user_id) REFERENCES public.account_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_user_user_permissions account_user_user_pe_permission_id_66c44191_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.account_user_user_permissions
+    ADD CONSTRAINT account_user_user_pe_permission_id_66c44191_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_user_user_permissions account_user_user_pe_user_id_cc42d270_fk_account_u; Type: FK CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.account_user_user_permissions
+    ADD CONSTRAINT account_user_user_pe_user_id_cc42d270_fk_account_u FOREIGN KEY (user_id) REFERENCES public.account_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: booking_booking_tables booking_booking_tabl_booking_id_dc63e8f3_fk_booking_b; Type: FK CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.booking_booking_tables
+    ADD CONSTRAINT booking_booking_tabl_booking_id_dc63e8f3_fk_booking_b FOREIGN KEY (booking_id) REFERENCES public.booking_booking(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: booking_booking_tables booking_booking_tables_table_id_7d0b56be_fk_booking_table_id; Type: FK CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.booking_booking_tables
+    ADD CONSTRAINT booking_booking_tables_table_id_7d0b56be_fk_booking_table_id FOREIGN KEY (table_id) REFERENCES public.booking_table(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: booking_booking booking_booking_user_id_e1eb6912_fk_account_user_id; Type: FK CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.booking_booking
+    ADD CONSTRAINT booking_booking_user_id_e1eb6912_fk_account_user_id FOREIGN KEY (user_id) REFERENCES public.account_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: booking_table booking_table_restaurant_id_469cc8e7_fk_booking_restaurant_id; Type: FK CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.booking_table
+    ADD CONSTRAINT booking_table_restaurant_id_469cc8e7_fk_booking_restaurant_id FOREIGN KEY (restaurant_id) REFERENCES public.booking_restaurant(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_account_user_id; Type: FK CONSTRAINT; Schema: public; Owner: booking_user
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_account_user_id FOREIGN KEY (user_id) REFERENCES public.account_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

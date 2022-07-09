@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  django:
+    build: .
+    restart: on-failure
+    command: bash -c "python manage.py collectstatic --noinput && python manage.py migrate && python manage.py initadmin && ./manage.py runserver"
+    volumes:
+      - static:/web/static
+      - .:/web/
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+  db:
+    image: postgres:11
+    restart: on-failure
+    volumes:
+      - ./deploy/postgres/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=booking_user
+      - POSTGRES_PASSWORD=*UHBytr7
+      - POSTGRES_DB=booking_db
+volumes:
+  static:

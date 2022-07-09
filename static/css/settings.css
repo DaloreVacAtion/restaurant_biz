@@ -1,0 +1,16 @@
+input.telegram {
+    width:  200px;
+    height: 30px;
+}
+
+input.telegram, a.edit-telegram {
+    display: inline-block;
+}
+
+div#chatIdValue, a.edit-telegram {
+    display: inline-block;
+}
+
+a.edit-telegram, a.save-telegram {
+    margin-left: 10px;
+}

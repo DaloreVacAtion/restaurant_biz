@@ -1,0 +1,33 @@
+.start-btn{
+ color: #000;
+ font-size: 15px;
+ font-weight: bold;
+ text-transform: uppercase;
+ padding: 12px 5px 11px;
+ transition: all 0.5s ease 0s;
+}
+
+.start-btn:hover,
+.start-btn:focus{
+ color: #fff;
+ letter-spacing: 3px;
+ box-shadow: none;
+ outline: none;
+}
+
+.side-btn{
+ color: #26619c;
+ font-size: 15px;
+ font-weight: bold;
+ text-transform: uppercase;
+ padding: 12px 5px 11px;
+ transition: all 0.5s ease 0s;
+}
+
+.side-btn:hover,
+.side-btn:focus{
+ color: #000;
+ letter-spacing: 3px;
+ box-shadow: none;
+ outline: none;
+}

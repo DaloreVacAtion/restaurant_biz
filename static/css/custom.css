@@ -1,0 +1,190 @@
+.blur-effect {
+    background-color: #ffffff00;
+    backdrop-filter:blur(10px) brightness(110%);
+    -webkit-backdrop-filter: blur(10px);
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-flter: blur(10px);
+    z-index: 1;
+}
+
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 100px;
+  padding: 100px;
+}
+
+.content-button {
+  position: relative;
+  left: 10%;
+  right: 10%;
+  z-index: 9999;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+
+#bg, #search-bg {
+  background-repeat: no-repeat;
+  background-size: 1080px auto;
+}
+
+#bg {
+  background-position: center top;
+  padding: 70px 90px 120px 90px;
+}
+
+#search-container {
+  position: relative;
+}
+
+#search-bg {
+  /* Absolutely position it, but stretch it to all four corners, then put it just behind #search's z-index */
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  z-index: 99;
+
+  /* Pull the background 70px higher to the same place as #bg's */
+  background-position: center -70px;
+
+  -webkit-filter: blur(10px);
+  filter: blur(10px);
+}
+
+#search {
+  /* Put this on top of the blurred layer */
+  position: relative;
+  z-index: 100;
+  padding: 20px;
+  background: rgb(34,34,34); /* for IE */
+  background: rgba(34,34,34,0.75);
+}
+
+@media (max-width: 600px ) {
+  #bg { padding: 10px; }
+  #search-bg { background-position: center -10px; }
+}
+
+#search h2, #search h5, #search h5 a { text-align: center; color: #fefefe; font-weight: normal; }
+#search h2 { margin-bottom: 50px }
+#search h5 { margin-top: 70px }
+
+.form-container{
+ background: #ecf0f3;
+ font-family: 'Nunito', sans-serif;
+ padding: 40px;
+ border-radius: 20px;
+ box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+}
+
+.form-container .form-icon{
+ color: #ac40ab;
+ font-size: 55px;
+ text-align: center;
+ line-height: 100px;
+ width: 100px;
+ height:100px;
+ margin: 0 auto 15px;
+ border-radius: 50px;
+ box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px #fff;
+}
+
+.form-container .title{
+ color: #ac40ab;
+ font-size: 25px;
+ font-weight: 700;
+ text-transform: uppercase;
+ letter-spacing: 1px;
+ text-align: center;
+ margin: 0 0 20px;
+}
+
+.form-container .form-horizontal .form-group{ margin: 0 0 25px 0; }
+
+.form-container .form-horizontal .form-group label{
+ font-size: 15px;
+ font-weight: 600;
+ text-transform: uppercase;
+}
+
+.form-container .form-horizontal .form-control{
+ color: #333;
+ background: #ecf0f3;
+ font-size: 15px;
+ height: 50px;
+ padding: 20px;
+ letter-spacing: 1px;
+ border: none;
+ border-radius: 50px;
+ box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
+ display: inline-block;
+ transition: all 0.3s ease 0s;
+}
+
+.form-container .form-horizontal .form-control:focus{
+ box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
+ outline: none;
+}
+
+.form-container .form-horizontal .form-control::placeholder{
+ color: #808080;
+ font-size: 14px;
+}
+
+.form-container .form-horizontal .btn{
+ color: #000;
+ background-color: #ac40ab;
+ font-size: 15px;
+ font-weight: bold;
+ text-transform: uppercase;
+ width: 100%;
+ padding: 12px 15px 11px;
+ border-radius: 20px;
+ box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px #fff;
+ border: none;
+ transition: all 0.5s ease 0s;
+}
+
+.form-container .form-horizontal .btn:hover,
+.form-container .form-horizontal .btn:focus{
+ color: #fff;
+ letter-spacing: 3px;
+ box-shadow: none;
+ outline: none;
+}
+
+@media screen and (max-width: 1023px) {
+    body {
+        padding: 50px;
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 415px) {
+
+    body {
+        padding: 15px;
+    }
+    .form-container {
+        padding: 10px;
+    }
+
+    .form-container .title {
+        font-size: 18px;
+    }
+    .form-container .form-icon {
+        font-size: 24px;
+        line-height: 50px;
+        width: 50px;
+        height: 50px;
+    }
+    a {
+        font-size: 12px;
+    }
+}
